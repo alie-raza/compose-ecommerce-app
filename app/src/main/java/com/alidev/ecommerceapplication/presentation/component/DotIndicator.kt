@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.alidev.ecommerceapplication.ui.theme.Orange
 
 @Composable
 fun DotIndicator(totalDots: Int, selectedIndex: Int) {
@@ -31,7 +32,7 @@ fun DotIndicator(totalDots: Int, selectedIndex: Int) {
                     modifier = Modifier
                         .size(height = 7.dp, width = 15.dp)
                         .clip(CircleShape)
-                        .background(color = androidx.compose.ui.graphics.Color.Cyan)
+                        .background(color = Orange)
                 )
             } else {
                 Box(
