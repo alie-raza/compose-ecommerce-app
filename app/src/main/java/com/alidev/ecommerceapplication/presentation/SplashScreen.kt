@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.alidev.ecommerceapplication.R
+import com.alidev.ecommerceapplication.navigation.screen.Screen
 import kotlinx.coroutines.delay
 
 @Composable
@@ -45,6 +46,7 @@ fun SplashScreen(
         )
         delay(1200L)
         navController.popBackStack()
+        navController.navigate(Screen.OnBoarding.route)
     }
 
     Splash(scale = scale.value)
