@@ -31,7 +31,7 @@ fun RootNavigationGraph(navController: NavHostController) {
             SignUpScreen(navController = navController)
         }
 
-        composable(route = Screen.SignUp.route) {
+        composable(route = Screen.CompleteScreen.route) {
             CompleteProfileScreen(navController = navController)
         }
 //

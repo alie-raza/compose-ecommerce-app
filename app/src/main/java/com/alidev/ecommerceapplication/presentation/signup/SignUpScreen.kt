@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.alidev.ecommerceapplication.R
+import com.alidev.ecommerceapplication.navigation.screen.Screen
 import com.alidev.ecommerceapplication.presentation.component.CustomTextField
 import com.alidev.ecommerceapplication.presentation.component.DefaultBackArrow
 import com.alidev.ecommerceapplication.presentation.component.ErrorSuggestion
@@ -153,7 +154,7 @@ fun SignUpScreen(navController: NavHostController) {
 
         Button(
             onClick = {
-
+                navController.navigate(Screen.CompleteScreen.route)
             },
             modifier = Modifier
                 .fillMaxWidth()
