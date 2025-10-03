@@ -1,5 +1,4 @@
 package com.alidev.ecommerceapplication.presentation.signin
-import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,7 +18,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -47,7 +45,6 @@ import com.alidev.ecommerceapplication.R
 import com.alidev.ecommerceapplication.presentation.component.CustomTextField
 import com.alidev.ecommerceapplication.presentation.component.DefaultBackArrow
 import com.alidev.ecommerceapplication.presentation.component.ErrorSuggestion
-import com.alidev.ecommerceapplication.ui.theme.DIMENS_12dp
 import com.alidev.ecommerceapplication.ui.theme.DIMENS_16dp
 import com.alidev.ecommerceapplication.ui.theme.DIMENS_40dp
 import com.alidev.ecommerceapplication.ui.theme.GilroyFontFamily
@@ -55,7 +52,6 @@ import com.alidev.ecommerceapplication.ui.theme.Orange
 import com.alidev.ecommerceapplication.ui.theme.PrimaryLightColor
 import com.alidev.ecommerceapplication.ui.theme.TEXT_SIZE_18sp
 import com.alidev.ecommerceapplication.ui.theme.TextColor
-import kotlinx.coroutines.launch
 
 @Composable
 fun SignInScreen(navController: NavHostController) {

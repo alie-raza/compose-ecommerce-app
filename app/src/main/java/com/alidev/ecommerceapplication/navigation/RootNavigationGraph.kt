@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.alidev.ecommerceapplication.navigation.screen.Screen
 import com.alidev.ecommerceapplication.presentation.SplashScreen
 import com.alidev.ecommerceapplication.presentation.onboarding.OnBoardingScreen
+import com.alidev.ecommerceapplication.presentation.signin.SignInScreen
 
 @Composable
 fun RootNavigationGraph(navController: NavHostController) {
@@ -20,8 +21,8 @@ fun RootNavigationGraph(navController: NavHostController) {
             SplashScreen(navController = navController)
         }
 
-        composable(route = Screen.OnBoarding.route) {
-            OnBoardingScreen(navController = navController)
+        composable(route = Screen.SignIn.route) {
+            SignInScreen(navController = navController)
         }
 //
 //        composable(route = Graph.MAIN) {

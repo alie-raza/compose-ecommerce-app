@@ -4,7 +4,10 @@ sealed class Screen(val route: String) {
 
     object Splash : Screen("splash_screen")
 
-    object OnBoarding : Screen("on_boarding_screen")
+
+    object SignIn : Screen("sign_in")
+
+//    object OnBoarding : Screen("on_boarding_screen")
 
     object Search : Screen("search_screen")
 

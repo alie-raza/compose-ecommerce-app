@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.alidev.ecommerceapplication.R
+import com.alidev.ecommerceapplication.navigation.screen.Screen
 import com.alidev.ecommerceapplication.presentation.component.DotIndicator
 import com.alidev.ecommerceapplication.ui.theme.DIMENS_12dp
 import com.alidev.ecommerceapplication.ui.theme.DIMENS_16dp
@@ -153,10 +154,7 @@ fun SplashScreen(
                         pagerState.animateScrollToPage(pagerState.currentPage + 1) // ✅ safe call
                     }
                 } else {
-                    // navigate to home
-//                    navController.navigate("home") {
-//                        popUpTo("onboarding") { inclusive = true }
-//                    }
+                    navController.navigate(Screen.SignIn.route)
                 }
             },
             modifier = Modifier
