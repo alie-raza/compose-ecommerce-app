@@ -3,6 +3,7 @@ package com.alidev.ecommerceapplication.di
 import com.alidev.ecommerceapplication.data.Repository
 import com.alidev.ecommerceapplication.domain.UseCases
 import com.alidev.ecommerceapplication.domain.saveUserUseCase.SaveUserUseCase
+import com.alidev.ecommerceapplication.domain.searchUserUseCase.SearchUserUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,7 +19,8 @@ object RepositoryModule {
     @Singleton
     fun provideUseCase(repository: Repository): UseCases {
         return UseCases(
-            saveUser = SaveUserUseCase(repository)
+            saveUser = SaveUserUseCase(repository),
+            getUser = SearchUserUseCase(repository)
 
         )
     }

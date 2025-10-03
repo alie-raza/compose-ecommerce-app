@@ -1,4 +1,6 @@
 package com.alidev.ecommerceapplication.presentation.signin
+//noinspection UsingMaterialAndMaterial3Libraries
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-//noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Checkbox
@@ -40,8 +41,14 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalContext
+import kotlinx.coroutines.launch
 import com.alidev.ecommerceapplication.R
 import com.alidev.ecommerceapplication.navigation.screen.Screen
 import com.alidev.ecommerceapplication.presentation.component.CustomTextField
@@ -56,7 +63,9 @@ import com.alidev.ecommerceapplication.ui.theme.TEXT_SIZE_18sp
 import com.alidev.ecommerceapplication.ui.theme.TextColor
 
 @Composable
-fun SignInScreen(navController: NavHostController) {
+fun SignInScreen(navController: NavHostController,  signInViewModel: SignInViewModel = hiltViewModel()) {
+
+    val context = LocalContext.current
 
 
     var email by remember { mutableStateOf(TextFieldValue("")) }
@@ -73,6 +82,9 @@ fun SignInScreen(navController: NavHostController) {
     val passwordErrorState = remember {
         mutableStateOf(false)
     }
+
+    val uiState = signInViewModel.uiState.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -144,7 +156,7 @@ fun SignInScreen(navController: NavHostController) {
         Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 15.dp),
+                .padding(top = 5.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ){
@@ -176,10 +188,25 @@ fun SignInScreen(navController: NavHostController) {
             }
         }
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(50.dp))
 
         Button(
             onClick = {
+                if(email.text.trim().isNotEmpty()&&password.text.trim().isNotEmpty()){
+                    coroutineScope.launch {
+                        val user = signInViewModel.checkUser(email.text.trim(), password.text.trim())
+                        if (user != null) {
+
+                            Toast.makeText(context,"User found",Toast.LENGTH_SHORT).show()
+//                            navController.navigate(Screen.CompleteScreen.route) {
+//                                popUpTo(Screen.SignIn.route) { inclusive = true }
+//                            }
+                        }
+                        else{
+                            Toast.makeText(context,"User not found",Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
 
             },
             modifier = Modifier
@@ -196,6 +223,11 @@ fun SignInScreen(navController: NavHostController) {
                 fontSize = TEXT_SIZE_18sp,
                 color = Color.White
             )
+        }
+
+        if (uiState.value.errorMessage != null) {
+            Spacer(modifier = Modifier.height(10.dp))
+            ErrorSuggestion(uiState.value.errorMessage!!)
         }
 
         Column(
