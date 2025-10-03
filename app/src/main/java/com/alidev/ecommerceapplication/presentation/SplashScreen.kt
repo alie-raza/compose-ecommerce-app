@@ -57,7 +57,7 @@ fun SplashScreen(
     )
 
     val pagerState = rememberPagerState(initialPage = 0)
-    val coroutineScope = rememberCoroutineScope() // ✅ Use this scope
+    val coroutineScope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -151,7 +151,7 @@ fun SplashScreen(
             onClick = {
                 if (pagerState.currentPage < splashImageList.lastIndex) {
                     coroutineScope.launch {
-                        pagerState.animateScrollToPage(pagerState.currentPage + 1) // ✅ safe call
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
                     }
                 } else {
                     navController.navigate(Screen.SignIn.route)
