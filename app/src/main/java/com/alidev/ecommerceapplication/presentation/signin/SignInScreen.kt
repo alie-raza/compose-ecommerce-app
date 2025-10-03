@@ -8,23 +8,46 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.alidev.ecommerceapplication.R
+import com.alidev.ecommerceapplication.presentation.component.CustomTextField
 import com.alidev.ecommerceapplication.presentation.component.DefaultBackArrow
+import com.alidev.ecommerceapplication.presentation.component.ErrorSuggestion
 import com.alidev.ecommerceapplication.ui.theme.TextColor
 
 @Composable
 fun SignInScreen(navController: NavHostController) {
+
+
+    var email by remember { mutableStateOf(TextFieldValue("")) }
+
+    var password by remember { mutableStateOf(TextFieldValue("")) }
+
+    val emailErrorState = remember {
+        mutableStateOf(false)
+    }
+    val passwordErrorState = remember {
+        mutableStateOf(false)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -53,6 +76,49 @@ fun SignInScreen(navController: NavHostController) {
             color = TextColor,
             textAlign = TextAlign.Center
         )
+
+        Spacer(modifier = Modifier.height(50.dp))
+
+        CustomTextField(
+            placeholder = "example@email.com",
+            trailingIcon = R.drawable.mail,
+            label = "Email",
+            errorState = emailErrorState,
+            keyboardType = KeyboardType.Email,
+            visualTransformation = VisualTransformation.None,
+            onChanged = { newEmail ->
+                email = newEmail
+            }
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        CustomTextField(
+            placeholder = "example@email.com",
+            trailingIcon = R.drawable.lock,
+            label = "Password",
+            errorState = passwordErrorState,
+            keyboardType = KeyboardType.Password,
+            visualTransformation = PasswordVisualTransformation(),
+            onChanged = { pass ->
+                password = pass
+            }
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        if (emailErrorState.value) {
+            ErrorSuggestion("Please enter valid email address.")
+        }
+
+        if(passwordErrorState.value){
+            ErrorSuggestion("Please enter valid password.")
+        }
+
+
+
+
+
 
     }
 }
