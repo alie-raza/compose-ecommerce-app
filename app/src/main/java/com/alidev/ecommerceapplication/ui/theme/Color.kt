@@ -16,7 +16,7 @@ val Black = Color(0xFF000000)
 
 val Orange = Color(0xFFFF7643)
 
-val Colors.PrimaryLightColor get() = Color(0xFFFFECDF);
+val PrimaryLightColor = Color(0xFFFFECDF);
 val Colors.SecondaryColor get() = Color(0xFF979797)
 val TextColor = Color(0xFF757575)
 
