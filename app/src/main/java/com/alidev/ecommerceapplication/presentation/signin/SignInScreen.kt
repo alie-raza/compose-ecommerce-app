@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+//noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Checkbox
@@ -93,7 +94,7 @@ fun SignInScreen(navController: NavHostController) {
                 Text(text = "Sign in", color = TextColor, fontSize = 18.sp)
             }
         }
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(30.dp))
         Text(text = "Welcome Back", fontSize = 26.sp, fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.height(10.dp))
         Text(
@@ -275,12 +276,6 @@ fun SignInScreen(navController: NavHostController) {
                     })
             }
         }
-
-
-
-
-
-
     }
 }
 

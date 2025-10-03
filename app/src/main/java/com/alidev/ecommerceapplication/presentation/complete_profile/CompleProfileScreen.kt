@@ -1,4 +1,5 @@
-package com.alidev.ecommerceapplication.presentation.signup
+package com.alidev.ecommerceapplication.presentation.complete_profile
+
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,6 +18,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -52,19 +54,30 @@ import com.alidev.ecommerceapplication.ui.theme.TEXT_SIZE_18sp
 import com.alidev.ecommerceapplication.ui.theme.TextColor
 
 @Composable
-fun SignUpScreen(navController: NavHostController) {
+fun CompleteProfileScreen(navController: NavHostController) {
 
-    var email by remember { mutableStateOf(TextFieldValue("")) }
+    var firstName by remember { mutableStateOf(TextFieldValue("")) }
 
-    var password by remember { mutableStateOf(TextFieldValue("")) }
+    var lastName by remember { mutableStateOf(TextFieldValue("")) }
 
-    var confirmPassword by remember { mutableStateOf(TextFieldValue("")) }
+    var phoneNumber by remember { mutableStateOf(TextFieldValue("")) }
+
+    var address by remember { mutableStateOf(TextFieldValue("")) }
 
 
-    val emailErrorState = remember {
+    val firstNameErrorState = remember {
         mutableStateOf(false)
     }
-    val passwordErrorState = remember {
+
+    val lastNameErrorState = remember {
+        mutableStateOf(false)
+    }
+
+    val phoneNumberErrorState = remember {
+        mutableStateOf(false)
+    }
+
+    val addressErrorState = remember {
         mutableStateOf(false)
     }
 
@@ -89,7 +102,7 @@ fun SignUpScreen(navController: NavHostController) {
             }
         }
         Spacer(modifier = Modifier.height(30.dp))
-        Text(text = "Register Account", fontSize = 26.sp, fontWeight = FontWeight.Bold)
+        Text(text = "Complete Profile", fontSize = 26.sp, fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = "Complete your details or continue\nwith social media.",
@@ -102,12 +115,12 @@ fun SignUpScreen(navController: NavHostController) {
         CustomTextField(
             placeholder = "example@email.com",
             trailingIcon = R.drawable.mail,
-            label = "Email",
-            errorState = emailErrorState,
-            keyboardType = KeyboardType.Email,
+            label = "First Name",
+            errorState = firstNameErrorState,
+            keyboardType = KeyboardType.Text,
             visualTransformation = VisualTransformation.None,
-            onChanged = { newEmail ->
-                email = newEmail
+            onChanged = { fn ->
+                firstName = fn
             }
         )
 
@@ -116,12 +129,12 @@ fun SignUpScreen(navController: NavHostController) {
         CustomTextField(
             placeholder = "example@email.com",
             trailingIcon = R.drawable.lock,
-            label = "Password",
-            errorState = passwordErrorState,
-            keyboardType = KeyboardType.Password,
-            visualTransformation = PasswordVisualTransformation(),
-            onChanged = { pass ->
-                password = pass
+            label = "Last Name",
+            errorState = lastNameErrorState,
+            keyboardType = KeyboardType.Text,
+            visualTransformation = VisualTransformation.None,
+            onChanged = { ln ->
+                lastName = ln
             }
         )
 
@@ -131,25 +144,38 @@ fun SignUpScreen(navController: NavHostController) {
         CustomTextField(
             placeholder = "example@email.com",
             trailingIcon = R.drawable.lock,
-            label = "Confirm Password",
-            errorState = passwordErrorState,
-            keyboardType = KeyboardType.Password,
+            label = "Phone Number",
+            errorState = phoneNumberErrorState,
+            keyboardType = KeyboardType.Number,
             visualTransformation = PasswordVisualTransformation(),
-            onChanged = { pass ->
-                confirmPassword = pass
+            onChanged = { pn ->
+                phoneNumber = pn
             }
         )
         Spacer(modifier = Modifier.height(10.dp))
 
-        if (emailErrorState.value) {
-            ErrorSuggestion("Please enter valid email address.")
-        }
+        CustomTextField(
+            placeholder = "example@email.com",
+            trailingIcon = R.drawable.lock,
+            label = "Address",
+            errorState = phoneNumberErrorState,
+            keyboardType = KeyboardType.Text,
+            visualTransformation = VisualTransformation.None,
+            onChanged = { ad ->
+                address = ad
+            }
+        )
 
-        if(passwordErrorState.value){
-            ErrorSuggestion("Please enter valid password.")
-        }
 
-        Spacer(modifier = Modifier.height(30.dp))
+//        if (emailErrorState.value) {
+//            ErrorSuggestion("Please enter valid email address.")
+//        }
+//
+//        if(passwordErrorState.value){
+//            ErrorSuggestion("Please enter valid password.")
+//        }
+
+        Spacer(modifier = Modifier.height(40.dp))
 
         Button(
             onClick = {
@@ -173,66 +199,10 @@ fun SignUpScreen(navController: NavHostController) {
 
         Column(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .padding(bottom = 50.dp),
             verticalArrangement = Arrangement.Bottom
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(
-                    space = 10.dp,
-                    alignment = Alignment.CenterHorizontally
-                )
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(50.dp)
-                        .background(
-                            PrimaryLightColor,
-                            shape = CircleShape
-                        ),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.google_icon),
-                        contentDescription = "Google Login Icon"
-                    )
-                }
-                Box(
-                    modifier = Modifier
-                        .size(50.dp)
-                        .background(
-                            PrimaryLightColor,
-                            shape = CircleShape
-                        )
-                        .clickable {
-
-                        },
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.twitter),
-                        contentDescription = "Twitter Login Icon"
-                    )
-                }
-                Box(
-                    modifier = Modifier
-                        .size(50.dp)
-                        .background(
-                            PrimaryLightColor,
-                            shape = CircleShape
-                        )
-                        .clickable {
-
-                        },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.facebook_2),
-                        contentDescription = "Facebook Login Icon"
-                    )
-                }
-
-            }
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -274,6 +244,6 @@ fun SignUpScreen(navController: NavHostController) {
 @Composable
 fun SignUpScreenPreview() {
     val navController = rememberNavController()
-    SignUpScreen(navController = navController)
+    CompleteProfileScreen(navController = navController)
 }
 

@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.alidev.ecommerceapplication.navigation.screen.Screen
 import com.alidev.ecommerceapplication.presentation.SplashScreen
+import com.alidev.ecommerceapplication.presentation.complete_profile.CompleteProfileScreen
 import com.alidev.ecommerceapplication.presentation.onboarding.OnBoardingScreen
 import com.alidev.ecommerceapplication.presentation.signin.SignInScreen
 import com.alidev.ecommerceapplication.presentation.signup.SignUpScreen
@@ -28,6 +29,10 @@ fun RootNavigationGraph(navController: NavHostController) {
 
         composable(route = Screen.SignUp.route) {
             SignUpScreen(navController = navController)
+        }
+
+        composable(route = Screen.SignUp.route) {
+            CompleteProfileScreen(navController = navController)
         }
 //
 //        composable(route = Graph.MAIN) {
