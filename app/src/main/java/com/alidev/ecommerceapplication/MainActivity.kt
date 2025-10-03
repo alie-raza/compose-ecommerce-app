@@ -16,7 +16,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.alidev.ecommerceapplication.navigation.RootNavigationGraph
 import com.alidev.ecommerceapplication.ui.theme.EcommerceApplicationTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
 

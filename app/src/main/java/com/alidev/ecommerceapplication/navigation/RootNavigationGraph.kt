@@ -7,7 +7,6 @@ import androidx.navigation.compose.composable
 import com.alidev.ecommerceapplication.navigation.screen.Screen
 import com.alidev.ecommerceapplication.presentation.SplashScreen
 import com.alidev.ecommerceapplication.presentation.complete_profile.CompleteProfileScreen
-import com.alidev.ecommerceapplication.presentation.onboarding.OnBoardingScreen
 import com.alidev.ecommerceapplication.presentation.signin.SignInScreen
 import com.alidev.ecommerceapplication.presentation.signup.SignUpScreen
 

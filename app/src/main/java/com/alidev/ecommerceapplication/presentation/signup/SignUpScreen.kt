@@ -1,5 +1,6 @@
 package com.alidev.ecommerceapplication.presentation.signup
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -36,9 +38,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.alidev.ecommerceapplication.R
+import com.alidev.ecommerceapplication.domain.SaveUser
 import com.alidev.ecommerceapplication.navigation.screen.Screen
 import com.alidev.ecommerceapplication.presentation.component.CustomTextField
 import com.alidev.ecommerceapplication.presentation.component.DefaultBackArrow
@@ -53,7 +57,12 @@ import com.alidev.ecommerceapplication.ui.theme.TEXT_SIZE_18sp
 import com.alidev.ecommerceapplication.ui.theme.TextColor
 
 @Composable
-fun SignUpScreen(navController: NavHostController) {
+fun SignUpScreen(
+    navController: NavHostController,
+    saveUserViewModel: SaveUserViewModel = hiltViewModel()
+) {
+
+    val context = LocalContext.current
 
     var email by remember { mutableStateOf(TextFieldValue("")) }
 
@@ -146,7 +155,7 @@ fun SignUpScreen(navController: NavHostController) {
             ErrorSuggestion("Please enter valid email address.")
         }
 
-        if(passwordErrorState.value){
+        if (passwordErrorState.value) {
             ErrorSuggestion("Please enter valid password.")
         }
 
@@ -154,7 +163,13 @@ fun SignUpScreen(navController: NavHostController) {
 
         Button(
             onClick = {
-                navController.navigate(Screen.CompleteScreen.route)
+                if(email.text.isNotEmpty()&&password.text.isNotEmpty()&&confirmPassword.text.isNotEmpty()){
+                    val user = SaveUser(0,"","",email.text.trim(),password.text.trim(),123,"",true)
+                    saveUserViewModel.saveUser(user)
+
+                    Toast.makeText(context,"User saved",Toast.LENGTH_SHORT).show()
+                }
+//                navController.navigate(Screen.CompleteScreen.route)
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -264,7 +279,6 @@ fun SignUpScreen(navController: NavHostController) {
 
             }
         }
-
 
 
     }
