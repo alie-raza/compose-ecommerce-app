@@ -1,4 +1,5 @@
-package com.alidev.ecommerceapplication.presentation.signin
+package com.alidev.ecommerceapplication.presentation.signup
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,8 +17,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Checkbox
-import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,24 +27,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.alidev.ecommerceapplication.R
-import com.alidev.ecommerceapplication.navigation.screen.Screen
 import com.alidev.ecommerceapplication.presentation.component.CustomTextField
 import com.alidev.ecommerceapplication.presentation.component.DefaultBackArrow
 import com.alidev.ecommerceapplication.presentation.component.ErrorSuggestion
+import com.alidev.ecommerceapplication.presentation.signin.SignInScreen
 import com.alidev.ecommerceapplication.ui.theme.DIMENS_16dp
 import com.alidev.ecommerceapplication.ui.theme.DIMENS_40dp
 import com.alidev.ecommerceapplication.ui.theme.GilroyFontFamily
@@ -55,16 +52,14 @@ import com.alidev.ecommerceapplication.ui.theme.TEXT_SIZE_18sp
 import com.alidev.ecommerceapplication.ui.theme.TextColor
 
 @Composable
-fun SignInScreen(navController: NavHostController) {
-
+fun SignUpScreen(navController: NavHostController) {
 
     var email by remember { mutableStateOf(TextFieldValue("")) }
 
     var password by remember { mutableStateOf(TextFieldValue("")) }
 
-    var checkBox by remember {
-        mutableStateOf(false)
-    }
+    var confirmPassword by remember { mutableStateOf(TextFieldValue("")) }
+
 
     val emailErrorState = remember {
         mutableStateOf(false)
@@ -90,14 +85,14 @@ fun SignInScreen(navController: NavHostController) {
             }
 
             Box(modifier = Modifier.weight(1f)) {
-                Text(text = "Sign in", color = TextColor, fontSize = 18.sp)
+                Text(text = "Sign Up", color = TextColor, fontSize = 18.sp)
             }
         }
         Spacer(modifier = Modifier.height(50.dp))
-        Text(text = "Welcome Back", fontSize = 26.sp, fontWeight = FontWeight.Bold)
+        Text(text = "Register Account", fontSize = 26.sp, fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Sign in with your email or password\nor continue with social media.",
+            text = "Complete your details or continue\nwith social media.",
             color = TextColor,
             textAlign = TextAlign.Center
         )
@@ -130,6 +125,20 @@ fun SignInScreen(navController: NavHostController) {
             }
         )
 
+        Spacer(modifier = Modifier.height(20.dp))
+
+
+        CustomTextField(
+            placeholder = "example@email.com",
+            trailingIcon = R.drawable.lock,
+            label = "Confirm Password",
+            errorState = passwordErrorState,
+            keyboardType = KeyboardType.Password,
+            visualTransformation = PasswordVisualTransformation(),
+            onChanged = { pass ->
+                confirmPassword = pass
+            }
+        )
         Spacer(modifier = Modifier.height(10.dp))
 
         if (emailErrorState.value) {
@@ -138,41 +147,6 @@ fun SignInScreen(navController: NavHostController) {
 
         if(passwordErrorState.value){
             ErrorSuggestion("Please enter valid password.")
-        }
-
-        Row (
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 15.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ){
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 15.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ){
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Checkbox(
-                        checked = checkBox, onCheckedChange = {
-                            checkBox = it
-                        },
-                        colors = CheckboxDefaults.colors(checkedColor = Orange)
-                    )
-                    Text(text = "Remember me", color = TextColor, fontSize = 14.sp)
-                }
-                Text(
-                    text = "Forget Password",
-                    color = TextColor,
-                    style = TextStyle(textDecoration = TextDecoration.Underline),
-                    modifier = Modifier.clickable {
-//                    navController.navigate(AuthScreen.ForgetPasswordScreen.route)
-                    }
-                )
-            }
         }
 
         Spacer(modifier = Modifier.height(30.dp))
@@ -271,23 +245,21 @@ fun SignInScreen(navController: NavHostController) {
                     text = "Sign Up",
                     color = Orange,
                     modifier = Modifier.clickable {
-                        navController.navigate(Screen.SignUp.route)
+//                        navController.navigate(AuthScreen.SignUpScreen.route)
                     })
             }
         }
 
 
 
-
-
-
     }
-}
 
+}
 
 @Preview(showBackground = true)
 @Composable
-fun OnSignInScreenPreview() {
+fun SignUpScreenPreview() {
     val navController = rememberNavController()
-    SignInScreen(navController = navController)
+    SignUpScreen(navController = navController)
 }
+
